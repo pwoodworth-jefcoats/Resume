@@ -2,6 +2,7 @@
 title: "Phoebe Woodworth-Jefcoats, PhD"
 format: 
   closeread-html:
+    image: Data/CareerMap.png
     cr-style:
       section-background-color: white
     theme: [zephyr, custom.scss]
