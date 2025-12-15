@@ -1,0 +1,378 @@
+---
+title: "Phoebe Woodworth-Jefcoats, PhD"
+format: 
+  closeread-html:
+    cr-style:
+      section-background-color: white
+    theme: [zephyr, custom.scss]
+---
+
+Kaneohe, HI  |  <phoebe.jefcoats@gmail.com>  
+[pwj-dataviz.com](https://www.pwj-dataviz.com)  |  GitHub: [pwoodworth-jefcoats](https://github.com/pwoodworth-jefcoats)  |  ORCiD: [0000-0001-9353-923X](https://orcid.org/0000-0001-9353-923X)  
+
+## Professional Summary
+I have over 20 years of experience turning large datasets into easy-to-understand
+graphics and reports, all backed by thorough data analysis.  I'm adept at workflows
+that merge data analysis and communication product development, including incorporating
+branding standards.  Across my work, I focus on using data to provide clarity, tell
+stories, and inform decisions for audiences ranging from technical experts to casual
+readers.  I embrace collaborative open science and contribute to the development of
+tools, templates, best practice guides, and hands-on training.  
+\
+Scroll through my resume and CV below.  Mouse over the graphics for more details.
+
+```{r}
+#| include: false
+#| message: false
+#| warning: false
+
+# Global setup
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+::::{.cr-section}
+
+## My Resume
+
+**Employment**   
+Mouse over the timeline to see dates of employment 
+and job descriptions. @cr-jobs
+
+:::{#cr-jobs}
+```{r, message = FALSE}
+# Load packages
+library(tidyverse, quietly = TRUE)
+library(here)
+library(ggiraph) # For interactive elements
+
+# Following an example from:
+# https://r-graph-gallery.com/web-vertical-line-chart-with-ggplot2.html
+# with an assist from phind.com and 
+# https://github.com/clementrx/Closeread-Prize/blob/main/index.qmd
+
+# Load data
+jobs <- read.csv(here("Data", "Employment.csv"))
+labels <- read.csv(here("Data", "TimelineLabels.csv"))
+labels_jobs <- labels |>
+  filter(category == "job")
+
+# This is tedius, but not sure of a better way
+lj1 <- labels |>
+  filter(category == "job_1")
+lj2 <- labels |>
+  filter(category == "job_2")
+lj3 <- labels |>
+  filter(category == "job_3")
+
+employ_interactive <- ggplot() +
+  geom_segment_interactive(data = jobs, aes(x = Start, y = 10,
+                                            xend = End, yend = 10,
+                                            color = Employer,
+                                            tooltip = Focus),
+                           linewidth = 3,
+                           show.legend = FALSE) +
+  geom_text(data = labels_jobs, aes(x = x, y = y, label = label),
+            size = 4,
+            hjust = 0,
+            show.legend = FALSE) +
+  geom_text(data = lj1, aes(x = x, y = y, label = label),
+            color = "#003087",
+            size = 4,
+            hjust = 0,
+            show.legend = FALSE) +
+  geom_text(data = lj2, aes(x = x, y = y, label = label),
+            color = "#77BDE7",
+            size = 4,
+            hjust = 0,
+            show.legend = FALSE) +
+  geom_text(data = lj3, aes(x = x, y = y, label = label),
+            color = "#3366cc",
+            size = 4,
+            hjust = 0,
+            show.legend = FALSE) +
+  scale_y_continuous(
+    limits = c(0, 100),
+    position = "left") +
+  scale_x_continuous(
+    limits = c(2002, 2026)) +
+  scale_color_manual(values = c("#77BDE7", "#3366cc", "#003087")) +
+  theme_void() +
+  coord_flip() 
+
+girafe(ggobj = employ_interactive,
+       options = list(
+         opts_tooltip(
+           opacity = 0.9
+         )
+       )
+       )
+
+```
+:::
+
+**Education**  
+Mouse over the circles to see academic focus. @cr-schools
+
+:::{#cr-schools}
+```{r}
+# Load data
+school <- read.csv(here("Data", "Education.csv"))
+
+labels_school <- labels |>
+  filter(category == "degree")
+
+# Build on previous plot
+# which means replicating code from above
+edu_interactive <- ggplot() +
+geom_segment_interactive(data = jobs, aes(x = Start, y = 10,
+                                            xend = End, yend = 10,
+                                            color = Employer,
+                                            tooltip = Focus),
+                           linewidth = 3,
+                           show.legend = FALSE) +
+  geom_text(data = labels_jobs, aes(x = x, y = y, label = label),
+            size = 4,
+            hjust = 0,
+            show.legend = FALSE) +
+  geom_text(data = lj1, aes(x = x, y = y, label = label),
+            color = "#003087",
+            size = 4,
+            hjust = 0,
+            show.legend = FALSE) +
+  geom_text(data = lj2, aes(x = x, y = y, label = label),
+            color = "#77BDE7",
+            size = 4,
+            hjust = 0,
+            show.legend = FALSE) +
+  geom_text(data = lj3, aes(x = x, y = y, label = label),
+            color = "#3366cc",
+            size = 4,
+            hjust = 0,
+            show.legend = FALSE) +
+  scale_y_continuous(
+    limits = c(0, 100),
+    position = "left") +
+  scale_x_continuous(
+    limits = c(2002, 2026)) +
+  scale_color_manual(values = c("#77BDE7", "#3366cc", "#003087")) +
+  theme_void() +
+  coord_flip() +
+# new stuff added to plot
+geom_point_interactive(data = school, aes(x = Date, y = 10, tooltip = Focus),
+           shape = 21, color = "white", fill = "black", size = 5, stroke = 0.7,
+           show.legend = FALSE) +
+geom_text(data = labels_school, aes(x = x, y = y, label = label),
+          size = 4,
+          hjust = 0,
+          show.legend = FALSE)
+
+girafe(ggobj = edu_interactive,
+       options = list(
+         opts_tooltip(
+           opacity = 0.9
+         )
+       )
+       )
+```
+:::
+
+::::
+
+My education and career have taken me to many latitudes:
+
+```{r}
+#| column: screen
+#| output: 'asis'
+#| out.width: '100%'
+
+knitr::include_graphics("Data/CareerMap.png")
+
+# # Code below made figure above
+# library(ggbump) # For geom_sigmoid
+# library(paletteer) # for color palette
+# library(ggthemes) # for color palette
+# 
+# # Places to map
+# places <- read_csv(here("CV", "Data", "Geography.csv"), show_col_types = FALSE)
+# 
+# # Change Category to factor for easier plotting
+# places <- places |>
+#   mutate(Category = factor(Category,
+#                            levels = c("School", "NOAACorps", "Kapiolani", "JIMAR", "PIFSC")))
+# # Polygon for TAO array
+# TAOx <- c(165, 165, 265, 265, 165)
+# TAOy <- c(8, -8, -8, 8, 8)
+# Category <- rep("Ship", 5)
+# TAO <- tibble(TAOx, TAOy, Category)
+# 
+# m <- ggplot(places) +
+#   borders("world2", fill = "#A5AAAF", colour = "#A5AAAF") +
+#   geom_polygon(data = TAO, aes(x = TAOx, y = TAOy, group = Category),
+#                fill = "#00308790", color = NA,
+#                show.legend = FALSE) + 
+#   geom_segment(x = 202, xend = 202, y = 23, yend = 36,
+#                color = "#00308790",
+#                show.legend = FALSE) +
+#   geom_sigmoid(data = places, 
+#                aes(x = Lon, y = Lat, xend = 400, yend = 80-(Rank*7), group = Rank, color = Category),
+#                smooth = 10, 
+#                show.legend = FALSE) +
+#   geom_text(data = places, aes(x = 405, y = 80-(Rank*7), label = Text, colour = Category),
+#             size = 3.25,
+#             hjust = 0,
+#             show.legend = FALSE) +
+#    scale_color_manual(values = c("grey40", "#003087", "#3366cc", "#77BDE7", "#003087", "#00308750")) +
+#   geom_point(aes(Lon, Lat)) +
+#   theme_void()
+#   
+# pdf(here("CV", "Data", "CareerMap.pdf"), width = 8, height = 4)
+# m
+# dev.off()
+```
+
+::::{.cr-section}
+## My CV
+
+**Publication Summary**  
+Publications grouped by year (black outlines) and type (white outlines), shaded by authorship role: @cr-pub-tree
+
+:::{#cr-pub-tree}
+```{r}
+library(treemapify)
+
+# Colors from paletteer_d("rockthemes::secondlaw"), but black switched out
+
+Products <- read_csv(here("Data", "Products.csv"), show_col_types = FALSE)
+
+Products_byYearTypeAuthor <- Products %>%
+  count(Year, Type, Author)
+
+ggplot(Products_byYearTypeAuthor, aes(area = n, fill = Author, label = Author,
+                                      subgroup = Year,
+                                      subgroup2 = Type)) +
+  geom_treemap() +
+  scale_fill_discrete(name = "Authorship",
+                      type = c("#808080", "#58958C", "#9D7382", "#505797")) +
+  geom_treemap_subgroup2_border(colour = "white", size = 3) +
+  geom_treemap_subgroup_border(colour = "black", size = 5) +
+  geom_treemap_subgroup_text(place = "centre", grow = T, alpha = 0.5, colour =
+                             "black", fontface = "italic", min.size = 0) +
+  geom_treemap_subgroup2_text(place = "centre", grow = T, alpha = 0.5, colour =
+                             "white", fontface = "italic", min.size = 0) # +
+  # geom_treemap_text(colour = "grey", place = "topleft", reflow = T)
+
+```
+:::
+
+**Publication Details**  
+Mouse over the bars for a detailed look at my publications.  Publicly accessible publications are linked and will open in a new tab or window when you click on their links. @cr-pub-bar
+
+:::{#cr-pub-bar}
+```{r}
+library(paletteer) # for color palette
+# Thanks to https://stackoverflow.com/questions/59468583/ggiraph-tooltip-with-hyperlink
+# for help with the clickablility
+
+# Change Type to factor for better plotting
+Products_ord <- Products |>
+  mutate(Type = factor(Type, 
+                       levels = c("Journal Article", "Presentation", "Agency Publication",
+                                  "Poster", "Dashboard", "Template", "Website", 
+                                  "Journal Issue", "Tutorial", "Book Chapter",
+                                  "PICES Special Publication",
+                                  "Content and Graphics")))
+
+pub_interactive <- ggplot() +
+  geom_bar_interactive(data = Products_ord, 
+                       aes(x = Type, fill = Type,
+                           tooltip = ifelse((!is.na(Link) & Link != 'InReview'), 
+                                            paste0("<a href='", Link, "'>", Title, "</a>\n", Link), 
+                                            Title),
+                           onclick=paste0('window.open("', Link, '")'))) + 
+  # geom_bar(data = Products_ord, aes(x = Type, fill = Type)) +
+  scale_fill_paletteer_d("rcartocolor::Prism") +
+  # scale_fill_paletteer_d("rcartocolor::Safe") + # looked a little chaotic
+  facet_wrap(~Year) +
+  labs(y = "Count") +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+
+girafe(ggobj = pub_interactive,
+       options = list(
+         opts_tooltip(
+           opacity = 0.9
+         )
+       )
+       )
+
+```
+:::
+
+::::
+
+::::{.cr-section}
+## My Career Evolution
+
+The focus of my work has changed over time, shifting from data analysis to subject matter expertise. I've also expanded into teaching roles, including instruction and data visualization. @cr-role-evolve
+
+I'm looking to continue on this trajectory; using 
+my expertise, teaching abilities, data visualization skills to contribute directly to 
+climate solutions.
+
+:::{#cr-role-evolve}
+```{r}
+library(ggbump)
+library(cowplot) # for plotting aesthetics
+
+# colors from scale_color_paletteer_d("PrettyCols::Bold"), but reordered
+
+pub_roles <- Products |>
+  count(Year, Role) |>
+  mutate(ranking = rank(desc(n), ties.method = "average"), .by = Year)
+
+ggplot(pub_roles, aes(x = Year, y = ranking, color = Role)) +
+  geom_bump(aes(color = Role), linewidth = 1, smooth = 7,
+            data = ~. |> filter(Role != "Data Analysis"), 
+            show.legend = FALSE) + 
+  scale_color_manual(values = c("#679C35", "#CD1076","#6497B1","#6A359C")) +
+  # To address overplotting
+  geom_bump(color = "#FFB04F", linetype = 1, linewidth = 1, smooth = 7,
+            data = ~. |> filter(Role == "Data Analysis")) +
+  geom_text(data = pub_roles |> 
+              filter(Year == max(Year)),
+            aes(x = Year + 1, y = ranking, label = Role), hjust = 0,
+            show.legend = FALSE) +
+  geom_text(data = pub_roles |> 
+              filter(Year == 2020 & Role == "Data Analysis"),
+            aes(x = Year + 6, y = ranking, label = Role), hjust = 0,
+            color = "#FFB04F",
+            show.legend = FALSE) +
+  scale_x_continuous(limits = c(2004, 2035),
+                     breaks = seq(2005, 2025, 5)) +
+  labs(y = "Rank",
+       x = NULL) +
+  scale_y_reverse() +
+  theme_minimal_vgrid()
+
+```
+
+
+:::
+
+You can view my fill CV <a href="AddlFiles/Woodworth-Jefcoats_Phoebe_CV.pdf">here</a>.
+
+::::
+
+
+___
+
+**Acknowledgments**  
+*This interactive CV was a [Data Visualization Society](https://www.datavisualizationsociety.org/)* 
+*mentorship project.  Thanks to DVS for making this opportunity possible and to my mentor, *
+*[Mark Hanley](https://github.com/MarkHanly), for suggesting my CV as data to visualize and *
+*helping me figure out how to do it.  Seeing where I've been has helped me figure out where I want to go.*    
+\
+*R packages and helpful links are noted throughout the code and comments.*

@@ -1,0 +1,16 @@
+y,x,label,category
+15,2025,"Research Oceanographer, National Oceanic and Atmospheric Administration",job_1
+15,2010.5,"Data Research Specialist, Joint Institute for Marine and Atmospheric Research",job_2
+15,2009.5,"Lecturer, Kapiʻolani Community College",job_3
+15,2008,"Commissioned Officer, National Oceanic and Atmospheric Administration",job_1
+15,2019,"PhD, Marine Biology, University of Hawaiʻi",degree
+15,2005,"MS, Meteorology and Physical Oceanography, University of Miami",degree
+15,2003,"BS, Meteorology, University of Oklahoma",degree
+2,2003,2003,degree
+2,2005,2005,degree
+2,2006,2006,job
+2,2010,2010,job
+2,2015,2015,job
+2,2019,2019,degree
+2,2020,2020,job
+2,2025,2025,job 
