@@ -362,10 +362,9 @@ ggplot(pub_roles, aes(x = Year, y = ranking, color = Role)) +
 
 :::
 
-You can view my fill CV <a href="AddlFiles/Woodworth-Jefcoats_Phoebe_CV.pdf">here</a>.
-
 ::::
 
+You can view my fill CV <a href="AddlFiles/Woodworth-Jefcoats_Phoebe_CV.pdf">here</a>.
 
 ___
 
